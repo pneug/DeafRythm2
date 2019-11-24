@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -54,7 +55,7 @@ public class Game : MonoBehaviour
             OnBeat();
             calledOffBeat = false;
         }
-        else if (BeatTimer <= beatDur / 4f * 3f && calledOffBeat == false)
+        else if (BeatTimer <= beatDur / 2f && calledOffBeat == false)
         {
              OnOffBeat();
         }
@@ -142,6 +143,10 @@ public class Game : MonoBehaviour
         {
             score += 1;
             ScoreTxt.text = "Score: " + score;
+            if (!endless && score > 11)
+            {
+                Victory();
+            }
         }
         /*if (score < 10)
         {
@@ -154,6 +159,7 @@ public class Game : MonoBehaviour
         // check if the player has tapped exactly once
         if (score < 10)
         {
+            
             Handheld.Vibrate();
         }
 

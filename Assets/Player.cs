@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     public void OnTappedLeft()
     {
         playerTappedRight = false;
-        if (Math.Abs(Game.inst.BeatTimer - Game.inst.beatDur / 2f) <= Game.inst.beatDur / 10f)
+        if (Math.Abs(Game.inst.BeatTimer - Game.inst.beatDur / 2f) <= Game.inst.beatDur / 5f)
         {
             if (playerTappedOnce)
             {
