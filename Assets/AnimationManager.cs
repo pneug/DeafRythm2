@@ -21,14 +21,8 @@ public class AnimationManager : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        //image = GetComponent<Image>();
-    }
-
     public void OnBeat()
     {
-        print(frame);
         image.sprite = sprites[frame];
         frame = (frame + 1) % sprites.Length;
     }

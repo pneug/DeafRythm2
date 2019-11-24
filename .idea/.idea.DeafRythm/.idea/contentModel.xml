@@ -10,6 +10,7 @@
         <e p="Enemy.cs" t="Include" />
         <e p="EnemyManager.cs" t="Include" />
         <e p="Game.cs" t="Include" />
+        <e p="Notificator.cs" t="Include" />
         <e p="Player.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="TapChecker.cs" t="Include" />

@@ -17,25 +17,13 @@ public class EnemyManager : MonoBehaviour
         inst = this;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnBeat()
     {
         if (!spawnedEnemy)
         {
             GameObject newEnemy = Instantiate(EnemyPrefab, transform);
             int randInt = Random.Range(0, 3);
-            newEnemy.transform.localPosition = new Vector3(-50 + 50 * randInt, 0, 0);
+            newEnemy.transform.localPosition = new Vector3(-150 + 150 * randInt, 0, 0);
             enemies.Add(newEnemy.GetComponent<Enemy>());
         }
         spawnedEnemy = !spawnedEnemy;

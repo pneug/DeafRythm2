@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,39 +14,57 @@ public class Player : MonoBehaviour
     {
         inst = this;
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void OnTappedRight()
-    {
+    {        
         playerTappedRight = true;
-        if (playerTappedOnce)
+        if (Math.Abs(Game.inst.BeatTimer - Game.inst.beatDur / 2f) <= Game.inst.beatDur / 5f)
         {
-            // loose health for tapping twice?
-            
+            if (playerTappedOnce)
+            {
+                // loose health for tapping twice
+                Game.inst.LooseHealth("Tapped too often");
+            }
+            else
+            {
+                if (Game.inst.BeatTimer < Game.inst.beatDur / 2f)
+                {
+                    Game.inst.LooseHealth("Tapped too early");
+                }
+                else
+                {
+                    Game.inst.LooseHealth("Tapped too late");
+                }
+            }
         }
-        playerTappedOnce = !playerTappedOnce;
+
+        playerTappedOnce = true;
     }
     
     public void OnTappedLeft()
     {
         playerTappedRight = false;
-        if (playerTappedOnce)
+        if (Math.Abs(Game.inst.BeatTimer - Game.inst.beatDur / 2f) <= Game.inst.beatDur / 10f)
         {
-            // loose health for tapping twice?
-            
+            if (playerTappedOnce)
+            {
+                // loose health for tapping twice
+                Game.inst.LooseHealth("Tapped too often");
+            }
         }
-        playerTappedOnce = !playerTappedOnce;
+        else
+        {
+            if (Game.inst.BeatTimer < Game.inst.beatDur / 2f)
+            {
+                Game.inst.LooseHealth("Tapped too early");
+            }
+            else
+            {
+                Game.inst.LooseHealth("Tapped too late");
+            }
+        }
+
+        playerTappedOnce = true;
     }
 
     public void OnBeat()
@@ -54,25 +73,32 @@ public class Player : MonoBehaviour
         {
             if (playerTappedRight)
             {
-                if (transform.localPosition.x >= 50)
+                if (transform.localPosition.x >= 150)
                 {
-                    // lose health and dont move
+                    // lose health? and dont move
                     
                     return; // break?
                 }
 
-                transform.localPosition += Vector3.right * 50;
+                transform.localPosition += Vector3.right * 150;
             }
             else
             {
-                if (transform.localPosition.x <= -50)
+                if (transform.localPosition.x <= -150)
                 {
-                    // lose health and dont move
+                    // lose health? and dont move
                     
                     return; // break?
                 }
 
-                transform.localPosition += Vector3.left * 50;
+                transform.localPosition += Vector3.left * 150;
+            }
+        }
+        else
+        {
+            if (Game.inst.score > 3)
+            {
+                Game.inst.LooseHealth("Tap missing");
             }
         }
 
