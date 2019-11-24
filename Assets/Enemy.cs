@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,14 +17,26 @@ public class Enemy : MonoBehaviour
         
     }
 
-    public void Move()
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>true if collided with player</returns>
+    public bool Move()
     {
         transform.localPosition += Vector3.down *50f;
-        /*if (transform.localPosition.y <= Player.inst.transform.localPosition.y)
+        if (Math.Abs(transform.position.y - Player.inst.transform.position.y) <= 20)
         {
             // check if colliding with player
-            
-        }*/
+            if (Math.Abs(transform.position.x - Player.inst.transform.position.x) <= 20)
+            {
+                // let player loose health
+                Game.inst.LooseHealth();
+                return true;
+            }
+        }
         // maybe destroy if out of screen
+
+        return false;
     }
 }
